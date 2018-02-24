@@ -15,4 +15,6 @@ https://doc.scrapy.org/en/latest/intro/install.html
 RUNNING THE SCRIPT:
 -----------------------------------------------------------------------------------------
 
-1. Navigate to the folder with cd \aliexpress-master\aliexpress\aliexpress and run python create_new_db.py (prior delete aliexpress_db.sqlite with data)
+1. Navigate to the folder with cd \aliexpress-master\aliexpress\aliexpress and run python create_new_db.py (prior delete aliexpress_db.sqlite with data). This will generate new database file. Need to be done only once.
+2. To run the script you need to make sure you are in the \aliexpress-master\aliexpress\aliexpress directory, otherwise the script won't be able to find database file. There are two versions of the scraper aliexpress_spider.py- scrapes whole website and aliexpress_popular.py- scrapes only popular items.
+To run the scraper you need simply type scrapy crawl aliexpress_spider or scrapy crawl aliexpress_popular
