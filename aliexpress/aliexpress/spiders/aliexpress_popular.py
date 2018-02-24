@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import re
 import scrapy
 from ..items import AliexpressItem
 
@@ -22,7 +21,6 @@ class AliExpressPopular(scrapy.Spider):
         full_url = "https:" + url
 
         fields = AliexpressItem(name=name, orders=orders, url=full_url)
-        # fields = dict(name=name, orders=orders, url=full_url)
 
         yield fields
 
