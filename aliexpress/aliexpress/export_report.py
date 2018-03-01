@@ -5,6 +5,8 @@ sqlite_file = 'aliexpress_db.sqlite'
 conn = sqlite3.connect(sqlite_file)
 c = conn.cursor()
 
+start_date = input("Input the start date for the report, for example 2018-10-11:")
+end_date = input("Input the end date for the report, for example 2018-11-11:")
 
 query = '''SELECT
   present_table.name,
@@ -15,14 +17,14 @@ query = '''SELECT
   past_table.Timestamp,
   present_table.Timestamp
 FROM
-  (SELECT * FROM products WHERE DATE(Timestamp)="2018-02-23") as past_table
+  (SELECT * FROM products WHERE DATE(Timestamp)="{}") as past_table
 JOIN
-  (SELECT * FROM products WHERE DATE(Timestamp)="2018-02-24") as present_table
+  (SELECT * FROM products WHERE DATE(Timestamp)="{}") as present_table
 ON
   past_table.name = present_table.name
 GROUP BY
   present_table.name
-ORDER BY dif DESC'''
+ORDER BY dif DESC'''.format(start_date, end_date)
 
 c.execute(query)
 
@@ -32,3 +34,5 @@ with open("out.csv", "w", newline='') as csv_file:
     csv_writer.writerows(c)
 
 conn.close()
+
+print("Report generated and saved to out.csv")
