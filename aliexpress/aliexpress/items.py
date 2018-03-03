@@ -8,6 +8,7 @@
 import scrapy
 
 class AliexpressItem(scrapy.Item):
+    id = scrapy.Field()
     name = scrapy.Field()
     orders = scrapy.Field()
     url = scrapy.Field()

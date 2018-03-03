@@ -22,7 +22,7 @@ class NotNone(object):
 
 class InsertIntoDB(object):
     def process_item(self, item, spider):
-
+        item['id'] = item['id']
         item['name'] = item['name']
         item['orders'] = item['orders']
         item['url'] = item['url']
@@ -30,7 +30,7 @@ class InsertIntoDB(object):
         conn = sqlite3.connect('aliexpress_db.sqlite')
         c = conn.cursor()
 
-        c.execute("INSERT INTO products (name, orders, url) VALUES (?, ?, ?)", (item['name'], item['orders'], item['url'],))
+        c.execute("INSERT INTO products (id, name, orders, url) VALUES (?, ?, ?, ?)", (item['id'], item['name'], item['orders'], item['url'],))
         conn.commit()
         conn.close()
 

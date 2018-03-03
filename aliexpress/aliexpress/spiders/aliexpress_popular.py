@@ -15,12 +15,13 @@ class AliExpressPopular(scrapy.Spider):
 
     def individual_page(self, response):
         box = response.xpath('//div[@class="item"]')
+        id = box.xpath('.//div[@class="add-to-wishlist"]/a/@data-product-id').extract_first()
         name = box.xpath('.//h3/a/@title').extract_first()
         orders = box.xpath('.//div[@class="rate-history"]/span[@class="order-num"]/a/em/text()').re_first(r"(\d+)")
         url = box.xpath('.//h3/a/@href').extract_first()
         full_url = "https:" + url
 
-        fields = AliexpressItem(name=name, orders=orders, url=full_url)
+        fields = AliexpressItem(id=id, name=name, orders=orders, url=full_url)
 
         yield fields
 

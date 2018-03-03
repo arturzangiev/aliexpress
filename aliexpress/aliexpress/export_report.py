@@ -13,7 +13,8 @@ query = '''SELECT
   past_table.orders,
   present_table.orders,
   present_table.orders - past_table.orders AS dif,
-  present_table.url,
+  present_table.url as url_present,
+  past_table.url as url_past,
   past_table.Timestamp,
   present_table.Timestamp
 FROM
@@ -21,9 +22,7 @@ FROM
 JOIN
   (SELECT * FROM products WHERE DATE(Timestamp)="{}") as present_table
 ON
-  past_table.name = present_table.name
-GROUP BY
-  present_table.name
+  past_table.id = present_table.id
 ORDER BY dif DESC'''.format(start_date, end_date)
 
 c.execute(query)
